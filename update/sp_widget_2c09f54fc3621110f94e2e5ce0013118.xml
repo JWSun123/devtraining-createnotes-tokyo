@@ -12,7 +12,9 @@
 			noteBody: c.data.note,
 			noteTitle: c.data.title
 		}).then(function(r){
-			
+			if(updateType == 'title' || updateType == 'body'){
+				$rootScope.$emit('updateTitle', r.data);
+			}
 		})
 	}
 	
@@ -56,6 +58,9 @@
 				note.title = input.noteTitle;
 				note.note = input.noteBody;
 				note.update();
+				
+				data.title = note.getValue('title');
+				data.note = note.getValue('note').slice(0, 20);
 			}
 		}
 	}
